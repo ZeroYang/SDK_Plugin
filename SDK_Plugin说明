@@ -1,0 +1,48 @@
+SDK_Plugin说明
+
+参考xg打包脚本，使用ruby脚本，核心开源库CocoaPos/Xcodeproj
+https://github.com/CocoaPods/Xcodeproj
+
+**config.yaml**
+
+配置 sdk信息
+
+#.xcodeproj路径
+project_file_path: ./path/to/<project>.xcodeproj
+
+# 请修改工程的 targetName
+targetName: GameApp
+
+#bundleid
+bundle_id: com.game.jsws
+
+#sdk 
+sdk_channelName: ios_xg
+
+
+**run.yaml**
+
+配置sdk 源码 framework 等
+
+--系统库 ios 动态库部分
+# exemple=>system_libs: [libicucore.tbd,libstdc++.6.tbd,libz.tbd,libresolv.9.tbd,libz.1.2.5.tbd]
+
+--系统framework
+# --系统framework
+# exemple=> sys_frameworks: [StoreKit.framework,QuartzCore.framework,AdSupport.framework,
+				SystemConfiguration.framework,CFNetwork.framework,
+				 Security.framework,MobileCoreServices.framework,
+				 CoreTelephony.framework,CoreFoundation.framework,javascriptcore.framework]
+
+特殊
+
+# --动态framework
+创建embbed_frameworks文件夹，将动态framework放入该文件夹，并在run.yaml中embbed_frameworks: [] 指定
+# exemple=> embbed_frameworks: [XYPlatform.framework]
+
+#--带编译flag的src文件
+创建src文件夹，将src文件放入，并在run.yaml中source_files: [] 指定
+
+
+# exemple=> source_files: [{file_name: test1.m, complier_flag: -fno-objc-arc},
+#                {file_name: test2.m, complier_flag: -fno-objc-arc}]

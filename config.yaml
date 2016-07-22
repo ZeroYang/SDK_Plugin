@@ -1,0 +1,30 @@
+# 请修改 project_file_path 为工程在本机的实际路径
+project_file_path: ./path/to/<project>.xcodeproj
+
+# 请修改工程的 targetName
+targetName: GameApp
+
+bundle_id: com.game.jsws
+
+sdk_channelName: ios_xg
+
+
+# 上面配置只有XG 渠道打包需要
+# appKey: 7505909354272672
+# appId: 10032
+# xgsdk_channelid: ios_jinshanApple
+# bundle_id: com.game.jsws
+# xgsdkBuildNumber: 1.0.0
+# xgsdkPlanId: 2501
+# xgsdkServerVersion: v1
+# xgsdk_sdkAppid: 15515
+# xgsdk_sdkAppkey: 1dc16f7978d24819af02bcb53413f66c
+
+# # 服务端地址
+# XgRechargeUrl: http://p2.xgsdk.com
+# XgAuthUrl: http://a2.xgsdk.com
+# XgDataUrl: http://data.xgsdk.com
+# XgPortalUrl: http://console.xgsdk.com
+
+
+# 上面配置只有XG 渠道打包需要
