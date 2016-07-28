@@ -487,15 +487,62 @@ end
 
 p "update: add srouce...src dir"
 
-src_array = Dir::entries(res_path)
+#src_array = Dir::entries(res_path)
 
-#p "-------------src_array lengt==========" + src_array.length.to_s
-for item in src_array
-  p "item name = " + item
-  if item != '.' && item != '..'
-      Utils::GameSDK.setSourceFilePharse(executeTarget,srouce_group,res_path+"/"+item)
+# #p "-------------src_array lengt==========" + src_array.length.to_s
+# for item in src_array
+#   p "item name = " + item
+#   if item != '.' && item != '..'
+#     if File.directory?("#{res_path}/#{item}")
+#       p "Dir=" + item
+#     else
+#       p item
+#     end
+#       Utils::GameSDK.setSourceFilePharse(executeTarget,srouce_group,res_path+"/"+item)
+#   end
+# end
+
+#遍历src目录并将文件加入xcodeproj引用
+def addSrcDir(path,target,group)
+  tem_dir = ""
+  Dir.entries(path).each do |sub|
+    if sub != '.' && sub != '..' && sub != '.DS_Store'
+      if File.directory?("#{path}/#{sub}")
+        p "Dir=" + sub
+        name = File.basename(sub)
+        p "name="+name
+        #framework文件
+        if name.include?".framework"
+          p 'framework========'
+          Utils::GameSDK.setBuildPharse(target,group,path+"/"+sub)
+        elsif name.include?".bundle"
+          p 'bundle======'
+          Utils::GameSDK.setResoucePharse(target,group,path+"/"+sub)
+        else
+          addSrcDir("#{path}/#{sub}",target,group)
+        end
+      else
+        p "sub:"+sub
+        name = File.basename(sub)
+        p "name="+name
+        if name.include?".a"
+          p '.a========'
+          Utils::GameSDK.setBuildPharse(target,group,path+"/"+sub)
+        elsif name.include?".h" or name.include?".m" or name.include?".mm" or name.include?".c"
+          p 'add src file'
+          Utils::GameSDK.setSourceFilePharse(target,group,path+"/"+sub)
+        else
+          p "*********other file name =" + name
+          Utils::GameSDK.setSourceFilePharse(target,group,path+"/"+sub)
+          end
+        end
+      end
+    end
   end
 end
+addthing_group=sdk_group.new_group("addthing")
+addSrcDir(res_path+"/addthing",executeTarget,addthing_group)
+
 
 # 非edit模式下，需增加unity属性拷贝
 if !isEdit

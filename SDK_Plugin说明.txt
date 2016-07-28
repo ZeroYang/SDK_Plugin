@@ -46,3 +46,6 @@ sdk_channelName: ios_xg
 
 # exemple=> source_files: [{file_name: test1.m, complier_flag: -fno-objc-arc},
 #                {file_name: test2.m, complier_flag: -fno-objc-arc}]
+
+**sdk接入代码放置**
+SDK_Plugin/res/addthing 目录用于放置sdk接入代码(包括.a .framework .h .m .mm .bundle等文件)
