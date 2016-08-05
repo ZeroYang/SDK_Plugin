@@ -192,7 +192,7 @@ end
 
 p "update: other link flag..."
 Utils::GameSDK.addOtherLinkFlag(executeTarget,run_config["otherLinkFlag"])
-Utils::GameSDK.addCodeSignPath(executeTarget,"$(SDKROOT)/ResourceRules.plist")
+#Utils::GameSDK.addCodeSignPath(executeTarget,"$(SDKROOT)/ResourceRules.plist")
 Utils::GameSDK.addRunSearchPath(executeTarget,"$(inherited) @executable_path/Frameworks")
 if run_config["CxxLibraryConfig"]!=nil
    p "will modify c++ lib ..."
@@ -531,6 +531,9 @@ def addSrcDir(path,target,group)
         elsif name.include?".h" or name.include?".m" or name.include?".mm" or name.include?".c"
           p 'add src file'
           Utils::GameSDK.setSourceFilePharse(target,group,path+"/"+sub)
+        elsif name.include?".plist"
+          p 'add plist file'
+          Utils::GameSDK.setResoucePharse(target,group,path+"/"+sub)  
         else
           p "*********other file name =" + name
           Utils::GameSDK.setSourceFilePharse(target,group,path+"/"+sub)
