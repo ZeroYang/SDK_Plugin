@@ -532,12 +532,11 @@ def addSrcDir(path,target,group)
           p 'add src file'
           Utils::GameSDK.setSourceFilePharse(target,group,path+"/"+sub)
         elsif name.include?".plist"
-          p 'add plist file'
+          p 'add plist file name=' + name
           Utils::GameSDK.setResoucePharse(target,group,path+"/"+sub)  
         else
           p "*********other file name =" + name
           Utils::GameSDK.setSourceFilePharse(target,group,path+"/"+sub)
-          end
         end
       end
     end
